@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'delete_view' product.id %}">
+    {% csrf_token %}
+    <h3 class="text-success">`{{ product.name }}` bu mehsulu silmek istediyinize eminsinizmi?</h3>
+    <button type="submit" class="btn btn-danger">Sil</button>
+</form>

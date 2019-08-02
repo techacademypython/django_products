@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <title>{% block title %}Anbar stock{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fake.munisisazade.com/v1/5d309e7c39d46076d4bf05b9">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+    <script src="{% static 'js/datetimepicker.js' %}"></script>
+</head>
+<body>
+{% block message %}
+{% endblock %}
+{% if messages %}
+    {% for msg in messages %}
+        <div class="alert alert-success">
+            {{ msg }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% block body %}
+    <div class="container">
+        <h2>Register page</h2>
+        <a href="#" class="btn btn-success">Login</a>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for msg in field.errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Yadda saxla</button>
+        </form>
+    </div>
+{% endblock %}
+{% block modal %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}
+</body>
+</html>

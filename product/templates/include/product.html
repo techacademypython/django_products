@@ -1,0 +1,21 @@
+{% for product in product_list %}
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.company.name }}</td>
+        <td>{{ product.expire_date|date:"F d,Y" }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+            <button class="btn btn-success update-btn" data-toggle="modal"
+                    data-target="#updateProduct" data-url="{% url 'update_view' product.id %}">
+                Edit
+            </button>
+            <button class="btn btn-danger delete-btn" data-toggle="modal"
+                    data-target="#deleteProduct" data-url="{% url 'delete_view' product.id %}">
+                Delete
+            </button>
+        </td>
+
+    </tr>
+{% endfor %}

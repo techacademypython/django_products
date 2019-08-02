@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+
+<form method="post" action="{% url 'sales_update' sales.id %}">
+    <div class="form-group">
+        <label for="product_id">Product:</label>
+        <select name="product" class="form-control" id="product_id">
+            <option value="{{ sales.product.id }}">{{ sales.product }}</option>
+        </select>
+    </div>
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.name == "product" %}
+
+        {% else %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field|add_class:"form-control" }}
+                {% if field.errors %}
+                    {% for msg in field.errors %}
+                        <p class="text-danger">{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Yadda saxla</button>
+</form>

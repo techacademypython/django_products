@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Register {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Registration Stock management</h2>
+        <a href="#" class="btn btn-success">Login</a>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for msg in field.errors %}
+                            <p class="text-danger">{{ msg }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary">Qeydiyyatdan kec</button>
+        </form>
+
+    </div>
+{% endblock %}

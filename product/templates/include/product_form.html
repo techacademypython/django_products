@@ -1,0 +1,48 @@
+{% load widget_tweaks %}
+<form method="post" action="{% url 'update_view' product.id %}">
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.html_name == "company" %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <select name="company" class="form-control" id="{{ field.id_for_label }}">
+                    {% for company in company_list %}
+                        <option value="{{ company.id }}">{{ company.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if field.errors %}
+                    {% for msg in field.errors %}
+                        <p class="text-danger">{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% elif field.html_name == "update-expire_date" %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <input type='text' name="update-expire_date" class="form-control" value="{{ product.expire_date|date:"m/d/Y H:i A" }}" id='{{ field.id_for_label }}'/>
+                {% if field.errors %}
+                    {% for msg in field.errors %}
+                        <p class="text-danger">{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#{{ field.id_for_label }}').datetimepicker();
+                });
+            </script>
+        {% else %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{ field|add_class:"form-control" }}
+                {% if field.errors %}
+                    {% for msg in field.errors %}
+                        <p class="text-danger">{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Yadda saxla</button>
+</form>
